@@ -27,6 +27,7 @@ Public Class frmMain
         killLPPA()
         OpenCodesoft()
 
+        ' --> Need PCI_L112.dll file
         If Not INIT_PCI112() Then
             MsgBox("Unable to initialize Syntek")
             End

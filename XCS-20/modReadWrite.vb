@@ -1,25 +1,12 @@
 ﻿Option Explicit On
 Module modReadWrite
-    Public INICSINFOPATH As String 'Path to WOEntry.Mdb
-    Public INIDATABASEPATH As String 'Path to local Model.mdb
-    Public INIUSERPATH As String 'Path to local User.mdb
-    Public INISERVERPATH As String 'PATH TO SERVER DIR - to access Serial.mdb & Signal.Txt
     Public INISTATUSPATH As String 'PATH TO SERVER\FRIDGE
     Public INITEMPLATEPATH As String 'PATH TO LABEL Template
     Public INIPHOTOPATH As String 'PATH TO THE PHOTO FOR THE LABEL TEMPLATE
     Public INIPSNFOLDERPATH As String 'Path to the PSN.Txt
-    Public INITEMPPATH As String
     Public INIMATERIALPATH As String
-    Public INISLIDEPATH As String
 
-    Public INIHISPATH As String
-    Public INIMPCode As String
-    Public INIHISDBNAME As String
     Public INIACHIEVEPATH As String 'Path to achieve folder
-
-    Public INIPRINTPATH As String 'PATH TO PRINT.TXT
-    Public INITMPSERIALPATH As String 'PATH TO LOCAL TEMP SERIAL.TXT
-    Public INIREPRINTPATH As String
 
     Dim Fnum As Integer
     Dim LineStr As String
@@ -42,11 +29,6 @@ Module modReadWrite
                     ItemStr = Left$(LineStr, pos - 1)
 
                     Select Case UCase(SectionHeading)
-                        Case "DATABASE PATH"
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INIDATABASEPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
                         Case "LABEL PHOTO PATH" 'Shared FILE
                             Select Case UCase(ItemStr)
                                 Case "PATH" : INIPHOTOPATH = Mid$(LineStr, pos + 1)
@@ -72,72 +54,9 @@ Module modReadWrite
                                 Case "PATH" : INIACHIEVEPATH = Mid$(LineStr, pos + 1)
                             End Select
 
-                        Case "TEMP PATH" 'LOCAL DIR
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INITEMPPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
-                        Case "SERVER PATH"
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INISERVERPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
-                        Case "SLIDE PATH"
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INISLIDEPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
-                        Case "CSUNIT PATH"
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INICSINFOPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
                         Case "STATUS PATH"
                             Select Case UCase(ItemStr)
                                 Case "PATH" : INISTATUSPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
-                        Case "PRINT PATH" 'LOCAL FILE
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INIPRINTPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
-                        Case "TEMPSERIAL PATH" 'LOCAL DIR
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INITMPSERIALPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
-                        Case "USER PATH" 'LOCAL FILE
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INIUSERPATH = Mid$(LineStr, pos + 1)
-                            End Select
-
-                    'Case "DATABASE BACKUP INFORMATION"
-                    '    Select Case UCase(ItemStr)
-                    '        Case "BACKUP DESTINATION PATH": INIBackUpPath = Mid$(LineStr, pos + 1)
-                    '        Case "LAST BACKUP DATE": INIBackUpDate = Mid$(LineStr, pos + 1)
-                    '        Case "LAST BACKUP TIME": INIBackUpTime = Mid$(LineStr, pos + 1)
-                    '    End Select
-
-                    'Case "COMPACT DATABASE INFORMATION"
-                    '    Select Case UCase(ItemStr)
-                    '        Case "LAST COMPACT DATE": INICompactDate = Mid$(LineStr, pos + 1)
-                    '    End Select
-
-                    'Case "NAME PLATE LABEL" 'LOCAL DIR
-                    '    Select Case UCase(ItemStr)
-                    '        Case "LABEL PATH": INICSPATH = Mid$(LineStr, pos + 1)
-                    '    End Select
-
-                        Case "HISTORY DATABASE"
-                            Select Case UCase(ItemStr)
-                                Case "PATH" : INIHISPATH = Mid$(LineStr, pos + 1)
-                                Case "NAME" : INIHISDBNAME = Mid$(LineStr, pos + 1)
-                            End Select
-
-                        Case "MANUFACTURING PLANT CODE"
-                            Select Case UCase(ItemStr)
-                                Case "CODE" : INIMPCode = Mid$(LineStr, pos + 1)
                             End Select
                     End Select
                 End If
