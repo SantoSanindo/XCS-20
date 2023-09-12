@@ -336,6 +336,23 @@ FailComm:
         DUTParameter.UnitOriginalSate = ""
 
         For i = 1 To 6
+            If Unit.UnitContact_original(i) = "None" Then
+                DUTParameter.UnitOriginalSate = DUTParameter.UnitOriginalSate & "0"
+                Unit.UnitContactOriginaltemp(i) = "0"
+            Else
+                DUTParameter.UnitOriginalSate = DUTParameter.UnitOriginalSate & Unit.UnitContact_original(i)
+                Unit.UnitContactOriginaltemp(i) = Unit.UnitContact_original(i)
+            End If
+        Next
+        Unit.UnitContact_Wkey(1) = "" & dt.Rows(0).Item("Contact1_W_Key")
+        Unit.UnitContact_Wkey(2) = "" & dt.Rows(0).Item("Contact2_W_Key")
+        Unit.UnitContact_Wkey(3) = "" & dt.Rows(0).Item("Contact3_W_Key")
+        Unit.UnitContact_Wkey(4) = "" & dt.Rows(0).Item("Contact4_W_Key")
+        Unit.UnitContact_Wkey(5) = "" & dt.Rows(0).Item("Contact5_W_Key")
+        Unit.UnitContact_Wkey(6) = "" & dt.Rows(0).Item("Contact6_W_Key")
+        Unit.UnitStatewkey = ""
+
+        For i = 1 To 6
             If Unit.UnitContact_Wkey(i) = "None" Then
                 DUTParameter.UnitStatewkey = DUTParameter.UnitStatewkey & "0"
                 Unit.UnitcontactWkeytemp(i) = "0"
@@ -730,7 +747,6 @@ skip:
                                       Exit Sub
                                   End If
 
-
                                   If PSNFileInfo.ConnTestStatus <> "PASS" Then
                                       Txt_Msg.Text = "Printing label..."
                                       PrintLabel()
@@ -1068,10 +1084,10 @@ NoChange:
 
             Case 40
                 'Check holddutcyl status
-                '   If ReadIO(4, 0, 3) = 1 Then
+                'If ReadIO(4, 0, 3) = 1 Then
                 System.Threading.Thread.Sleep(50)
                 TestAction = 50
-   ' End If
+                'End If
             Case 50
                 'connect product
                 ConnectContact()
@@ -1284,7 +1300,7 @@ NoChange:
                         TestAction = 9000
                     End If
                 End If
-    'Checkcylup
+                'Checkcylup
 
             Case 280
                 DeEnergizeMagnet()
@@ -1303,32 +1319,32 @@ NoChange:
                 End If
 
             Case 290
-                If TestRead.OriginState(1) <> DUTParameter.UnitContactOriginaltemp(1) Or TestRead.KeyState(1) <> DUTParameter.UnitcontactWkeytemp(1) Or TestRead.KeyTension(1) <> DUTParameter.UnitContactWkeyTensiontemp(1) Then
+                If Test.OriginState(1) <> Unit.UnitContactOriginaltemp(1) Or Test.KeyState(1) <> Unit.UnitcontactWkeytemp(1) Or Test.KeyTension(1) <> Unit.UnitContactWkeyTensiontemp(1) Then
                     Txt_ContactPN1.BackColor = Color.Red
                     Txt_ContactPN2.BackColor = Color.Red
                     TeststatusFlag = True
                 End If
-                If TestRead.OriginState(2) <> DUTParameter.UnitContactOriginaltemp(2) Or TestRead.KeyState(2) <> DUTParameter.UnitcontactWkeytemp(2) Or TestRead.KeyTension(2) <> DUTParameter.UnitContactWkeyTensiontemp(2) Then
+                If Test.OriginState(2) <> Unit.UnitContactOriginaltemp(2) Or Test.KeyState(2) <> Unit.UnitcontactWkeytemp(2) Or Test.KeyTension(2) <> Unit.UnitContactWkeyTensiontemp(2) Then
                     Txt_ContactPN3.BackColor = Color.Red
                     Txt_ContactPN4.BackColor = Color.Red
                     TeststatusFlag = True
                 End If
-                If TestRead.OriginState(3) <> DUTParameter.UnitContactOriginaltemp(3) Or TestRead.KeyState(3) <> DUTParameter.UnitcontactWkeytemp(3) Or TestRead.KeyTension(3) <> DUTParameter.UnitContactWkeyTensiontemp(3) Then
+                If Test.OriginState(3) <> Unit.UnitContactOriginaltemp(3) Or Test.KeyState(3) <> Unit.UnitcontactWkeytemp(3) Or Test.KeyTension(3) <> Unit.UnitContactWkeyTensiontemp(3) Then
                     Txt_ContactPN5.BackColor = Color.Red
                     Txt_ContactPN6.BackColor = Color.Red
                     TeststatusFlag = True
                 End If
-                If TestRead.OriginState(4) <> DUTParameter.UnitContactOriginaltemp(4) Or TestRead.KeyState(4) <> DUTParameter.UnitcontactWkeytemp(4) Or TestRead.KeyTension(4) <> DUTParameter.UnitContactWkeyTensiontemp(4) Then
+                If Test.OriginState(4) <> Unit.UnitContactOriginaltemp(4) Or Test.KeyState(4) <> Unit.UnitcontactWkeytemp(4) Or Test.KeyTension(4) <> Unit.UnitContactWkeyTensiontemp(4) Then
                     Txt_ContactPN7.BackColor = Color.Red
                     Txt_ContactPN8.BackColor = Color.Red
                     TeststatusFlag = True
                 End If
-                If TestRead.OriginState(5) <> DUTParameter.UnitContactOriginaltemp(5) Or TestRead.KeyState(5) <> DUTParameter.UnitcontactWkeytemp(5) Or TestRead.KeyTension(5) <> DUTParameter.UnitContactWkeyTensiontemp(5) Then
+                If Test.OriginState(5) <> Unit.UnitContactOriginaltemp(5) Or Test.KeyState(5) <> Unit.UnitcontactWkeytemp(5) Or Test.KeyTension(5) <> Unit.UnitContactWkeyTensiontemp(5) Then
                     Txt_ContactPN9.BackColor = Color.Red
                     Txt_ContactPN10.BackColor = Color.Red
                     TeststatusFlag = True
                 End If
-                If TestRead.OriginState(6) <> DUTParameter.UnitContactOriginaltemp(6) Or TestRead.KeyState(6) <> DUTParameter.UnitcontactWkeytemp(6) Or TestRead.KeyTension(6) <> DUTParameter.UnitContactWkeyTensiontemp(6) Then
+                If Test.OriginState(6) <> Unit.UnitContactOriginaltemp(6) Or Test.KeyState(6) <> Unit.UnitcontactWkeytemp(6) Or Test.KeyTension(6) <> Unit.UnitContactWkeyTensiontemp(6) Then
                     Txt_ContactPN11.BackColor = Color.Red
                     Txt_ContactPN12.BackColor = Color.Red
                     TeststatusFlag = True
